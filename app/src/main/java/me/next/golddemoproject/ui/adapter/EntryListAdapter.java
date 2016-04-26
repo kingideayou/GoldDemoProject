@@ -18,6 +18,8 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.next.golddemoproject.R;
 import me.next.golddemoproject.model.Entry;
 import me.next.golddemoproject.ui.activities.WebViewEntryActivity;
@@ -54,18 +56,19 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.Entr
     public class EntryViewHolder extends RecyclerView.ViewHolder {
 
         private View mCard;
-        private TextView tvTitle;
-        private TextView tvContent;
-        private ImageView ivAvatar;
-        private ImageView ivScreenshot;
+        @Bind(R.id.tv_title)
+        TextView tvTitle;
+        @Bind(R.id.tv_content)
+        TextView tvContent;
+        @Bind(R.id.iv_avatar)
+        ImageView ivAvatar;
+        @Bind(R.id.iv_screenshot)
+        ImageView ivScreenshot;
 
         public EntryViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             mCard = itemView;
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvContent = (TextView) itemView.findViewById(R.id.tv_content);
-            ivAvatar = (ImageView) itemView.findViewById(R.id.iv_avatar);
-            ivScreenshot = (ImageView) itemView.findViewById(R.id.iv_screenshot);
         }
 
         public void onBindViewHolder(final Entry entry) {
