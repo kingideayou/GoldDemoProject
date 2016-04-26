@@ -20,6 +20,7 @@ import java.util.List;
 
 import me.next.golddemoproject.R;
 import me.next.golddemoproject.model.Entry;
+import me.next.golddemoproject.ui.activities.WebViewEntryActivity;
 
 /**
  * Created by NeXT on 16/4/25.
@@ -52,6 +53,7 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.Entr
 
     public class EntryViewHolder extends RecyclerView.ViewHolder {
 
+        private View mCard;
         private TextView tvTitle;
         private TextView tvContent;
         private ImageView ivAvatar;
@@ -59,13 +61,14 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.Entr
 
         public EntryViewHolder(View itemView) {
             super(itemView);
+            mCard = itemView;
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvContent = (TextView) itemView.findViewById(R.id.tv_content);
             ivAvatar = (ImageView) itemView.findViewById(R.id.iv_avatar);
             ivScreenshot = (ImageView) itemView.findViewById(R.id.iv_screenshot);
         }
 
-        public void onBindViewHolder(Entry entry) {
+        public void onBindViewHolder(final Entry entry) {
             tvTitle.setText(entry.getString("title"));
             tvContent.setText(entry.getString("content"));
             Glide.with(mContext).load(entry.getString("screenshot")).into(ivScreenshot);
@@ -85,6 +88,13 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.Entr
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            mCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WebViewEntryActivity.start(mContext, entry.getString("url"));
+                }
+            });
         }
     }
 

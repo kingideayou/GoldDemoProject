@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             query.include("user");
             query.include("user.installation");
             query.orderByDescending("createdAt");
-            query.limit(30);
+            query.limit(50);
             try {
                 return query.find();
             } catch (AVException e) {
